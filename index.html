@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="水藍魔力願望清單道具的攤位價格與歷史紀錄，由水藍鼠自動整理。">
+<title>願望清單價格</title>
+<link rel="stylesheet" href="style.css?v=3b267508839c4b2a">
+<script src="app.js?v=3b267508839c4b2a" defer></script>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <div class="title-row">
+      <h1>願望清單價格</h1>
+      <button type="button" id="theme" class="ghost" aria-label="切換深淺色">配色：自動</button>
+    </div>
+    <p id="meta" class="meta">讀取中…</p>
+    <div id="notice" class="banner" hidden></div>
+    <div id="fresh" class="banner info" hidden>
+      <span>有新的查價資料。</span>
+      <button type="button" id="reload">重新整理</button>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="頁面">
+    <button type="button" role="tab" data-tab="now" aria-selected="true">目前販售 <span class="count" data-count="now"></span></button>
+    <button type="button" role="tab" data-tab="history" aria-selected="false">歷史價格 <span class="count" data-count="history"></span></button>
+    <button type="button" role="tab" data-tab="missing" aria-selected="false">查無攤位 <span class="count" data-count="missing"></span></button>
+    <button type="button" role="tab" data-tab="about" aria-selected="false">說明</button>
+  </nav>
+
+  <div class="filters" id="filters">
+    <label class="field grow">
+      <span class="sr">搜尋</span>
+      <input type="search" id="q" placeholder="搜尋道具或店主" autocomplete="off">
+    </label>
+    <label class="field">
+      <span class="sr">伺服器</span>
+      <select id="server"><option value="">全部伺服器</option></select>
+    </label>
+  </div>
+
+  <main>
+    <section id="tab-now" role="tabpanel"></section>
+    <section id="tab-history" role="tabpanel" hidden></section>
+    <section id="tab-missing" role="tabpanel" hidden></section>
+    <section id="tab-about" role="tabpanel" hidden>
+      <h2>怎麼看這個頁面</h2>
+      <ul class="notes">
+        <li><strong>價格是攤位上的「列價」</strong>：同一列可能是一個或一疊道具。遊戲沒有顯示數量時寫「未顯示」，這時列價<strong>不能</strong>當成單價。</li>
+        <li><strong>位置</strong>是查價當下店主站的地圖座標。到了附近可以用店主名稱確認是哪一攤。</li>
+        <li><strong>變化</strong>是和上一次看到同一攤時比較：漲價、降價、持平、新上架或重新上架。中間漏讀的輪次不算「已下架」。</li>
+        <li><strong>查無攤位</strong>是官網搜尋沒有找到候選攤位。官網只列離線攤位，所以不代表沒人在賣；官網沒查完整的品名會另外列出。</li>
+        <li>資料由水藍鼠每輪查價後自動上傳，網頁不會自己去遊戲查價。超過預期時間沒更新時，頁面頂端會提醒。</li>
+        <li>歷史價格只保留最近 <span id="days">60</span> 天，依「道具名稱＋道具 ID＋數量」分組；走勢線是每輪看到的最低列價。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="foot">由水藍鼠自動整理。價格隨時可能變動，交易前請在遊戲內確認。</footer>
+</div>
+<div id="tip" class="tip" role="status" hidden></div>
+<noscript><p class="page">這個頁面需要啟用 JavaScript 才能顯示價格。</p></noscript>
+</body>
+</html>
